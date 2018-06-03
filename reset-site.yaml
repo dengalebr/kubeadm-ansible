@@ -12,6 +12,11 @@
       command: ip link delete flannel.1
       ignore_errors: True
 
-    - name: Delete cni0 interface
-      command: ip link delete cni0
+    - name: Delete tunl0 interface
+      command: ip link delete tunl0
       ignore_errors: True
+
+    - name: remove kubernetes Repository
+      file:
+        state: absent
+        path: /etc/apt/sources.list.d/kubernetes.list

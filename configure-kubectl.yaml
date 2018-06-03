@@ -1,0 +1,16 @@
+---
+
+- hosts: local
+  gather_facts: yes
+  become: yes
+  tasks:
+    - name: Remove existing kubernetes config file
+      fetch:
+        state: absent
+        path: /root/admin.conf
+
+    - name: Fetch file from remote server
+      shell: scp bala@master:/etc/kubernetes/admin.conf /root/admin.conf
+
+    - name: export to environment variable
+      shell: export KUBECONFIG=/root/admin.conf
